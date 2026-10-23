@@ -15,6 +15,7 @@ export default function HomeScreen() {
   const { colorScheme } = useTheme()
   const styles = getStyles(colorScheme)
 
+  const [selectedSlug, setSelectedSlug] = useState("");
 
 
   return (
@@ -39,7 +40,7 @@ export default function HomeScreen() {
       </View>
       <View style={styles.brandsContainer}>
         <Text style={styles.brandsTitle}> Brands</Text>
-        <Brands />
+        <Brands setSelectedSlug={setSelectedSlug} />
       </View>
 
 
@@ -51,7 +52,7 @@ export default function HomeScreen() {
       </View>
 
       <View style={styles.modelsContainer}>
-        <Models />
+        <Models selectedSlug={selectedSlug}  />
       </View>
     </View>
   );

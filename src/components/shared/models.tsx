@@ -1,15 +1,28 @@
 import { carModels } from "@/mock/car-models";
 import { Car } from "@/types/car.type";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import ModelCard from "../base/model-card";
 
-export default function Models() {
-    const shuffleArray = (array: Car[])=> [...array].sort(()=> Math.random() - 0.5); 
+interface ModelsProps {
+    selectedSlug: string;
+}
 
-    
+const shuffleArray = (array: Car[])=> [...array].sort(()=> Math.random() - 0.5); 
+
+export default function Models({ selectedSlug }: ModelsProps) {
     const [cars, setCars] = useState(shuffleArray(carModels));
     const [refreshing, setRefreshing] = useState(false);
+
+    const getBrandCars = () =>
+        selectedSlug
+        ? carModels.filter((car: Car) => car.brandSlug === selectedSlug)
+        : carModels;
+
+    useEffect(() => {
+        setCars(shuffleArray(getBrandCars()));
+    }, [selectedSlug]);
+    
 
     const onRefresh = async()=>{
         setRefreshing(true)

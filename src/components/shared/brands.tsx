@@ -1,18 +1,24 @@
-import { Image, ScrollView, StyleSheet, View } from "react-native";
+import { Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { carLogos } from "@/mock/car-logo";
 import { CarBrand } from "@/types/car.type";
+import { useState } from "react";
+
+interface BrandsProps {
+    setSelectedSlug: (slug: string) => void;
+}
 
 
-export default function Brands() {
+export default function Brands({ setSelectedSlug }: BrandsProps) {
+
     return (
         <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.container}>
             {carLogos.map((brand: CarBrand) => (
-                <View key={brand.slug} style={styles.brand}>
+                <Pressable key={brand.slug} style={styles.brand} onPress={() => setSelectedSlug(brand.slug)}>
                     <Image source={{ uri: brand.image.thumb }} style={styles.image} />
-                </View>
+                </Pressable>
             ))}
         </ScrollView>
     )
