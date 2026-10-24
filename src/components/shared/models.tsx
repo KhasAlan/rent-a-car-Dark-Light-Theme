@@ -27,7 +27,7 @@ export default function Models({ selectedSlug }: ModelsProps) {
     const onRefresh = async()=>{
         setRefreshing(true)
         await new Promise(resolve => setTimeout(resolve, 1000))
-        setCars(shuffleArray(carModels))
+        setCars(shuffleArray(getBrandCars()));
         setRefreshing(false)
     }
 
