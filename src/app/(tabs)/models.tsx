@@ -4,6 +4,7 @@ import Models from "@/components/shared/models";
 import { layout } from "@/constant/layout";
 import { useTheme } from "@/hooks/use-theme";
 import { ThemeType } from "@/types/theme-types";
+import { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -11,6 +12,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function ModelsScreen() {
     const { colorScheme } = useTheme();
     const styles = getStyles(colorScheme);
+
 
     return (
         <SafeAreaView style={styles.container}>
@@ -20,7 +22,7 @@ export default function ModelsScreen() {
 
             <View style={styles.modelsContainer}>
                 <View>
-                    <Brands />
+                    <Brands  />
                 </View>
                 <View>
                     <Models />
