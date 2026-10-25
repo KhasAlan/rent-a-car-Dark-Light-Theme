@@ -10,50 +10,61 @@ import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 
-export default function ModelsScreen() {
-    const { colorScheme } = useTheme();
-    const styles = getStyles(colorScheme);
+export default function ModelsScreen(){
+    const {colorScheme} = useTheme();
+    const colors = layout.colors[colorScheme];
+    const styles = getStyles(colors);
 
-    const { selectedSlug: initialSlug} = useLocalSearchParams<{ selectedSlug?: string}>();
 
-    const [selectedSlug, setSelectedSlug] = useState(initialSlug ?? "");
+        const { selectedSlug: initialSlug } =
+            useLocalSearchParams<{ selectedSlug?: string}>();
+        const [selectedSlug, setSelectedSlug] = useState(initialSlug ?? "");
 
-    return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.headerTitle}>Models</Text>
-            </View>
 
-            <View style={styles.modelsContainer}>
-                <View>
-                    <Brands setSelectedSlug={setSelectedSlug}/>
+        return (
+            <SafeAreaView style={styles.container}>
+                <View style={styles.header}>
+                    <Text style={styles.headerTitle}>Models</Text>
                 </View>
-                <View>
-                    <Models selectedSlug={selectedSlug} />
-                </View>
-            </View>
 
-        </SafeAreaView>
-    )
+
+                <View style={styles.modelsContainer}>
+                    <View>
+                        <Brands setSelectedSlug={setSelectedSlug} />
+                    </View>
+
+
+                    <View>
+                        <Models selectedSlug={selectedSlug} />
+                    </View>
+                </View>
+            </SafeAreaView>
+        );
 }
 
-const getStyles = (theme: ThemeType) => StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: theme === "dark" ? layout.colors.black : layout.colors.white,
-        paddingHorizontal: 16,
-    },
-    header: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-    },
-    headerTitle: {
-        fontFamily: layout.fonts.poppins.poppinsSemiBold,
-        fontSize: 20,
-        color: theme === "dark" ? layout.colors.primary : layout.colors.black,
-    },
-    modelsContainer: {
-        gap: 24,
-    },
-});
+
+const getStyles = (colors: typeof layout.colors.light) => 
+    StyleSheet.create({
+        container: {
+            flex: 1,
+            backgroundColor: colors.background,
+            paddingHorizontal: 16,
+        },
+
+
+        header: {
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+        },
+
+        headerTitle: {
+            fontFamily: layout.fonts.poppins.poppinsBold,
+            fontSize: 20,
+            color: colors.text
+        },
+
+        modelsContainer: {
+            gap: 24,
+        },
+    });

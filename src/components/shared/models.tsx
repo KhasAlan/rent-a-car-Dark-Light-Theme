@@ -3,7 +3,9 @@ import { Car } from "@/types/car.type";
 import { useEffect, useState } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import ModelCard from "../base/model-card";
+import {layout} from "@/constant/layout";
 
+import { useTheme } from "@/hooks/use-theme";
 interface ModelsProps {
     selectedSlug: string;
 }
@@ -11,6 +13,12 @@ interface ModelsProps {
 const shuffleArray = (array: Car[])=> [...array].sort(()=> Math.random() - 0.5); 
 
 export default function Models({ selectedSlug }: ModelsProps) {
+
+    const {colorScheme} = useTheme();
+    const colors = layout.colors[colorScheme];
+    const styles = getStyles(colors);
+
+
     const [cars, setCars] = useState(shuffleArray(carModels));
     const [refreshing, setRefreshing] = useState(false);
 
@@ -39,12 +47,21 @@ export default function Models({ selectedSlug }: ModelsProps) {
             refreshing={refreshing}
             onRefresh={onRefresh}
             contentContainerStyle={styles.modelsContainer}
+
+            style={styles.list}
         />
-    )
+    );
 }
 
-const styles = StyleSheet.create({
-    modelsContainer: {
-        gap: 12,
-    },
-})
+
+const getStyles = (colors: typeof layout.colors.light) => 
+    StyleSheet.create({
+        list: {
+            backgroundColor: colors.background,
+        },
+
+        modelsContainer: {
+            gap: 12
+        },
+    });
+

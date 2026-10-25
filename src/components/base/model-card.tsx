@@ -2,14 +2,21 @@ import { layout } from "@/constant/layout";
 import { useTheme } from "@/hooks/use-theme";
 import { Car } from "@/types/car.type";
 import { ThemeType } from "@/types/theme-types";
-import { Image, StyleSheet, Text, useWindowDimensions, View } from "react-native";
-
+import {
+    Image,
+    StyleSheet,
+    Text,
+    useWindowDimensions,
+    View,
+} from "react-native";
 interface ModelCardProps {
     model: Car;
 }
 
 export default function ModelCard({ model }: ModelCardProps) {
-    const { colorScheme } = useTheme();
+    const { colorScheme } = useTheme();//eto ubrat ?
+
+
     const styles = getStyles(colorScheme);
 
     const width = useWindowDimensions().width;
@@ -35,8 +42,8 @@ const getStyles = (theme: ThemeType) => StyleSheet.create({
         padding: 18,
         borderRadius: 16,
         backgroundColor: theme === "dark"
-            ? layout.colors.cardBackgroundDark
-            : layout.colors.cardBackgroundLight,
+            ? layout.colors.dark.surface
+            : layout.colors.light.surface,
         minHeight: 200,
     },
     modelCardTitle: {
@@ -55,14 +62,26 @@ const getStyles = (theme: ThemeType) => StyleSheet.create({
     },
     modelCardBrand: {
         fontFamily: layout.fonts.poppins.poppinsBold,
-        color: theme === "dark" ? layout.colors.primary : layout.colors.black,
+        color: theme === "dark" ? layout.colors.dark.text  : layout.colors.light.text,
     },
     modelCardModel: {
         fontFamily: layout.fonts.poppins.poppinsSemiBold,
         fontSize: 12,
+
+        color: theme === "dark" ? layout.colors.dark.secondaryText
+        : layout.colors.light.secondaryText
     },
+
+
+    
+
     modelPricePerDay: {
         fontFamily: layout.fonts.poppins.poppinsBold,
+         color: theme === "dark" ? layout.colors.dark.text : layout.colors.light.text,
     },
+
+   
     modelCardImage: {},
+
+    
 });

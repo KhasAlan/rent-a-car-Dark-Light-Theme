@@ -198,11 +198,17 @@ export default function SignUpForm() {
                         )}
                     />
 
-                    <Pressable
-                        style={({ pressed }) => [styles.button, styles.primaryButton, pressed && styles.pressed]}
-                        onPress={handleSubmit(onSubmit)}
-                        disabled={isSubmitting}
-                    >
+              <Pressable
+           style={({ pressed }) => [
+        styles.button,
+        styles.primaryButton,
+        pressed && styles.pressed,
+    ]}
+    onPress={() => {
+        void handleSubmit(onSubmit)();
+    }}
+    disabled={isSubmitting}
+>
                         {isSubmitting ? (
                             <ActivityIndicator color="#FFFFFF" />
                         ) : (
