@@ -41,13 +41,17 @@ export default function TabsLayout() {
       <Tabs.Screen name="models" options={{
         title: 'Models',
         headerShown: false,
-        href: null,
+        tabBarButton: () => null,
+        tabBarItemStyle: { display: 'none' },
+        // href: null,
       }} />
-      <Tabs.Screen name="profile/edit/page" options={{
-        title: 'Edit Profile',
-        headerShown: false,
-        href: null,
-      }} />
+      <Tabs.Screen name="profile/edit/page"
+        options={{
+          title: 'Edit Profile',
+          headerShown: false,
+          tabBarButton: () => null,
+          tabBarItemStyle: { display: 'none' },
+        }} />
 
     </Tabs>
   );

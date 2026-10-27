@@ -15,7 +15,6 @@ export default function Profile() {
   const styles = getStyles(colorScheme);
 
   const clearStorage = async () => {
-
     try {
       await AsyncStorage.setItem(USER_AUTH_STORAGE_KEY, JSON.stringify(false));
       router.push("/auth/sign-in");
@@ -23,6 +22,10 @@ export default function Profile() {
       console.error('Failed to clear async storage.', e);
     }
   };
+
+  const handleEditProfile = () => {
+    router.push("/profile/edit/page");
+  }
 
 
 
@@ -32,11 +35,15 @@ export default function Profile() {
       <Header title="Profile" />
       <View style={styles.buttonContainer}>
 
-        <Button onPress={()=>{router.push("/profile/edit/page")}}>
+        <Button onPress={handleEditProfile}>
           <Text style={styles.buttonText}>Edit Profile</Text>
         </Button>
 
-        <Button onPress={() => clearStorage()}>
+        <Button onPress={()=>{console.log('Driver License')}}>
+          <Text style={styles.buttonText}>Driver License</Text>
+        </Button>
+
+        <Button onPress={handleEditProfile}>
           <Text style={styles.buttonText}>Sign Out</Text>
         </Button>
       </View>

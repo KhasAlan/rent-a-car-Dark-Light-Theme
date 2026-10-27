@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface HeaderProps {
-    title: string;
+    title?: string;
 }
 
 export default function Header({ title }: HeaderProps) {
