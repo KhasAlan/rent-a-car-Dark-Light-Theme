@@ -2,7 +2,8 @@ import { layout } from "@/constant/layout";
 import { useTheme } from "@/hooks/use-theme";
 import { Car } from "@/types/car.type";
 import { ThemeType } from "@/types/theme-types";
-import { Image, StyleSheet, Text, useWindowDimensions, View } from "react-native";
+import { router } from "expo-router";
+import { Image, Pressable, StyleSheet, Text, useWindowDimensions, View } from "react-native";
 
 interface ModelCardProps {
     model: Car;
@@ -14,8 +15,12 @@ export default function ModelCard({ model }: ModelCardProps) {
 
     const width = useWindowDimensions().width;
 
-        return (
-            <View style={[styles.modelCard, { width: width - 32 }]}>
+    const handleSelectModel = () =>{
+        router.push(`/car-details/${model.id}/page`)
+    }
+
+    return (
+        <Pressable style={[styles.modelCard, { width: width - 32 }]} onPress={handleSelectModel}>
             <View style={styles.modelCardTitle}>
                 <View style={styles.modelCardBrandName}>
                     <Text style={styles.modelCardBrand}>{model.brand}</Text>
@@ -25,7 +30,7 @@ export default function ModelCard({ model }: ModelCardProps) {
             </View>
             <Image source={{ uri: model.image }} style={styles.modelCardImage} />
 
-        </View>
+        </Pressable>
     )
 }
 
@@ -51,7 +56,7 @@ const getStyles = (theme: ThemeType) => StyleSheet.create({
 
     },
     modelCardBrandName: {
-        gap:0,
+        gap: 0,
     },
     modelCardBrand: {
         fontFamily: layout.fonts.poppins.poppinsBold,

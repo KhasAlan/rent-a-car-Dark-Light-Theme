@@ -11,6 +11,13 @@ export type Car =  {
     pricePerDay: number;
     image: string;
     features: string[];
+
+    rating?: number;
+    topSpeed?: number;
+    doors?: number;
+    wifi?: boolean;
+    sensor?: boolean;
+    bluetooth?: string;
   }
 
   export type CarBrand = {
