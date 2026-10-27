@@ -23,7 +23,7 @@ export default function TabsLayout() {
         )
       }} />
 
-      <Tabs.Screen name="profile" options={{
+      <Tabs.Screen name="profile/page" options={{
         title: 'Profile',
         headerShown: false,
         tabBarIcon: () => (
@@ -40,6 +40,11 @@ export default function TabsLayout() {
       }} />
       <Tabs.Screen name="models" options={{
         title: 'Models',
+        headerShown: false,
+        href: null,
+      }} />
+      <Tabs.Screen name="profile/edit/page" options={{
+        title: 'Edit Profile',
         headerShown: false,
         href: null,
       }} />
