@@ -4,15 +4,24 @@ import Models from "@/components/shared/models";
 import { layout } from "@/constant/layout";
 import { useTheme } from "@/hooks/use-theme";
 import { ThemeType } from "@/types/theme-types";
-import { useState } from "react";
+import { useLocalSearchParams } from "expo-router";
+import { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ModelsScreen() {
     const { colorScheme } = useTheme();
-    const styles = getStyles(colorScheme);
 
-    const [selectedSlug, setSelectedSlug] = useState("");
+    const { selectedSlug: initialSlug } =
+        useLocalSearchParams<{ selectedSlug?: string }>();
+
+    const [selectedSlug, setSelectedSlug] = useState(initialSlug ?? "");
+
+    useEffect(() => {
+        setSelectedSlug(initialSlug ?? "");
+    }, [initialSlug]);
+
+    const styles = getStyles(colorScheme);
 
     return (
         <SafeAreaView style={styles.container}>

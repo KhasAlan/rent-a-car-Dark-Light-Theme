@@ -46,9 +46,15 @@ export default function HomeScreen() {
 
       <View style={styles.modelsHeader}>
         <Text style={styles.modelsTitle}>Hot Deals</Text>
-        <Pressable onPress={() => router.push('/(tabs)/models')}>
-          <Text style={styles.viewAllText}>View All</Text>
-        </Pressable>
+  
+        <Pressable onPress={() => router.push({
+      pathname: '/(tabs)/models',
+      params: { selectedSlug },
+    })
+  }
+>
+  <Text style={styles.viewAllText}>View All</Text>
+</Pressable>
       </View>
 
       <View style={styles.modelsContainer}>
