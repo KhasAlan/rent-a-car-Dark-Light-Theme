@@ -15,20 +15,29 @@ export default function EditProfile() {
 
   const [avatar, setAvatar] = useState<string | null>(null);
 
-  const getPhoto = async () => {
-    const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
-    if (cameraPermission.granted) {
-      const resultCamera = await ImagePicker.launchCameraAsync({
-        mediaTypes: ['images'],
-        allowsEditing: true,
-        aspect: [1, 1],
-        quality: 1,
-      })
-      if (!resultCamera.canceled) {
-        setAvatar(resultCamera.assets[0].uri);
-      }
-    }
+const getPhoto = async () => {
+  const cameraPermission =
+    await ImagePicker.requestCameraPermissionsAsync();
+
+  if (!cameraPermission.granted) {
+    Alert.alert(
+      "Permission required",
+      "Allow access to your camera."
+    );
+    return;
   }
+
+  const resultCamera = await ImagePicker.launchCameraAsync({
+    mediaTypes: ["images"],
+    allowsEditing: true,
+    aspect: [1, 1],
+    quality: 1,
+  });
+
+  if (!resultCamera.canceled) {
+    setAvatar(resultCamera.assets[0].uri);
+  }
+};
 
   const getGallery = async () => {
     const resultGallery = await ImagePicker.launchImageLibraryAsync({
@@ -79,7 +88,7 @@ export default function EditProfile() {
       <Header />
 
       {/* Rounded avatar with border */}
-      <View style={[styles.avatarContainer, { marginTop: top + 20 }]}>
+      <View style={[styles.avatarContainer, { top: top + 80 }]}>
         <View style={styles.avatarOverlay}>
           <Image source={avatar ? { uri: avatar } : require('@/assets/images/avatar.avif')} style={styles.avatar} />
           <Pressable style={styles.cameraButton} onPress={pickImage}>
@@ -98,17 +107,17 @@ const getStyles = (theme: ThemeType) => StyleSheet.create({
     flex: 1,
     backgroundColor: theme === "dark" ? layout.colors.black : layout.colors.white,
   },
-  avatarContainer: {
-    position: 'absolute',
-    top: '0%',
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    borderWidth: 2,
-    borderColor: layout.colors.primary,
-    backgroundColor: theme === "dark" ? layout.colors.black : layout.colors.white,
-    alignSelf: "center",
-  },
+avatarContainer: {
+  position: "absolute",
+  width: 100,
+  height: 100,
+  borderRadius: 50,
+  borderWidth: 2,
+  borderColor: layout.colors.primary,
+  backgroundColor:
+    theme === "dark" ? layout.colors.black : layout.colors.white,
+  alignSelf: "center",
+},
   avatarOverlay: {
     position: 'relative'
   },
